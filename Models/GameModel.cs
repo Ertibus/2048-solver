@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace _2048_solver.Models
+namespace TwoZeroFourEight.Models
 {
     class GameModel
     {

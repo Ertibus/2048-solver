@@ -4,8 +4,13 @@ using System.Text;
 
 namespace TwoZeroFourEight.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    class MainWindowViewModel : ViewModelBase
     {
-        public string Greeting => "Welcome to Avalonia!";
+        public GameBoardViewModel GameView { get; }
+
+        public MainWindowViewModel()
+        {
+            GameView = new ViewModels.GameBoardViewModel();
+        }
     }
 }

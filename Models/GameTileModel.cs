@@ -1,5 +1,4 @@
-
-namespace _2048_solver.Models
+namespace TwoZeroFourEight.Models
 {
     class GameTileModel
     {
