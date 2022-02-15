@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace _2048_solver.ViewModels
+namespace TwoZeroFourEight.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {

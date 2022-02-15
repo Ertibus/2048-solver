@@ -1,9 +1,9 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using _2048_solver.ViewModels;
+using TwoZeroFourEight.ViewModels;
 
-namespace _2048_solver
+namespace TwoZeroFourEight
 {
     public class ViewLocator : IDataTemplate
     {

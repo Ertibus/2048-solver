@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ReactiveUI;
 
-namespace _2048_solver.ViewModels
+namespace TwoZeroFourEight.ViewModels
 {
     public class ViewModelBase : ReactiveObject
     {

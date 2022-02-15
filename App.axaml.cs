@@ -1,10 +1,10 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using _2048_solver.ViewModels;
-using _2048_solver.Views;
+using TwoZeroFourEight.ViewModels;
+using TwoZeroFourEight.Views;
 
-namespace _2048_solver
+namespace TwoZeroFourEight
 {
     public partial class App : Application
     {

@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace _2048_solver.Views
+namespace TwoZeroFourEight.Views
 {
     public partial class MainWindow : Window
     {

@@ -3,7 +3,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.ReactiveUI;
 
-namespace _2048_solver
+namespace TwoZeroFourEight
 {
     class Program
     {
