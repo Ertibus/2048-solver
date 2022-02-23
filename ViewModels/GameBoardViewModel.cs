@@ -8,17 +8,24 @@ namespace TwoZeroFourEight.ViewModels
 {
     class GameBoardViewModel : ViewModelBase
     {
-        public ObservableCollection<GameTileModel> Items { get; set; }
 
         public GameBoardViewModel()
         {
             List<GameTileModel> items = new List<GameTileModel>();
-            items.Add(new GameTileModel(1, 1, 1));
-            items.Add(new GameTileModel(2, 2, 2));
-            items.Add(new GameTileModel(3, 3, 3));
-            items.Add(new GameTileModel(0, 4, 0));
-            items.Add(new GameTileModel(0, 1, 1));
+            Width = 400;
+            Height = 400;
+            for(int i = 0; i < 4; i++)
+            {
+                for(int j = 0; j < 4; j++)
+                {
+                    items.Add(new GameTileModel(i, j, i * 10 + j));
+                }
+            }
             Items = new ObservableCollection<GameTileModel>(items);
         }
+
+        public ObservableCollection<GameTileModel> Items { get; }
+        public int Width{ get; }
+        public int Height{ get; }
     }
 }

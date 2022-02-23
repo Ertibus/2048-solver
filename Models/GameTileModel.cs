@@ -2,6 +2,8 @@ namespace TwoZeroFourEight.Models
 {
     class GameTileModel
     {
+        private static int TILE_SIZE = 100;
+
         public GameTileModel(int x, int y, int number)
         {
             _posX = x;
@@ -24,13 +26,13 @@ namespace TwoZeroFourEight.Models
 
         public int PosX
         {
-            get => _posX;
+            get => _posX * TILE_SIZE;
             set { _posX = value; }
         }
 
         public int PosY
         {
-            get => _posY;
+            get => _posY * TILE_SIZE;
             set { _posY = value; }
         }
 

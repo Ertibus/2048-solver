@@ -6,17 +6,18 @@
              x:Class="TwoZeroFourEight.Views.GameBoardView">
   <UserControl.Styles>
     <Style Selector="ItemsControl > ContentPresenter">
-      <Setter Property="Grid.Row" Value="{Binding PosX}"/>
-      <Setter Property="Grid.Column" Value="{Binding PosY}"/>
+      <Setter Property="Canvas.Left" Value="{Binding PosX}"/>
+      <Setter Property="Canvas.Top" Value="{Binding PosY}"/>
     </Style>
   </UserControl.Styles>
 
 
-  <ItemsControl Items="{Binding Items}">
+  <ItemsControl Items="{Binding Items}"
+                Width="{Binding Width}"
+                Height="{Binding Height}">
     <ItemsControl.ItemsPanel>
       <ItemsPanelTemplate>
-        <Grid ShowGridLines="True" RowDefinitions="*,*,*,*,*,*,*" ColumnDefinitions="*,*,*,*,*,*,*,*">
-        </Grid>
+        <Canvas/>
       </ItemsPanelTemplate>
     </ItemsControl.ItemsPanel>
 
@@ -26,7 +27,6 @@
                 BorderBrush="Black"
                 BorderThickness="2"
                 CornerRadius="3"
-                Padding="4"
                 Width="100"
                 Height="100">
           <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Number}"/>
