@@ -43,5 +43,11 @@
           </DataTemplate>
         </ItemsControl.DataTemplates>
       </ItemsControl>
+      <Grid Grid.Row="0" Grid.Column="2" ColumnDefinitions="*,Auto,Auto,Auto,*" RowDefinitions="*,Auto,Auto,*">
+          <Button Width="100" Grid.Row="1" Grid.Column="2" Command="{Binding MoveUp}"/>
+          <Button Width="100" Grid.Row="2" Grid.Column="2" Command="{Binding MoveDown}"/>
+          <Button Width="100" Grid.Row="2" Grid.Column="1" Command="{Binding MoveLeft}"/>
+          <Button Width="100" Grid.Row="2" Grid.Column="3" Command="{Binding MoveRight}"/>
+      </Grid>
   </Grid>
 </UserControl>

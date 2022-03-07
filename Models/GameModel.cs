@@ -13,9 +13,9 @@ namespace TwoZeroFourEight.Models
             private set { _gameBoard = value; }
         }
 
-        public GameModel()
+        public GameModel(int size = 4)
         {
-            _gameBoard = new GameTileModel[4, 4];
+            _gameBoard = new GameTileModel[size, size];
         }
 
         private void SpawnNewRandomTile()
