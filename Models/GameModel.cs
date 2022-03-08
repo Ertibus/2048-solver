@@ -7,6 +7,7 @@ namespace TwoZeroFourEight.Models
     {
         private readonly Random _random = new Random();
         private GameTileModel[,] _gameBoard;
+        private int gameBoardSize = 4;
         public GameTileModel[,] GameBoard
         {
             get => _gameBoard;
@@ -16,6 +17,7 @@ namespace TwoZeroFourEight.Models
         public GameModel(int size = 4)
         {
             _gameBoard = new GameTileModel[size, size];
+            gameBoardSize = size;
         }
 
         private void SpawnNewRandomTile()
@@ -35,6 +37,10 @@ namespace TwoZeroFourEight.Models
         public void NewGame()
         {
             _gameBoard = new GameTileModel[4, 4];
+            for(int i = 0; i < 4; i++)
+                for(int j = 0; j < 4; j++)
+                    _gameBoard[i, j] = new GameTileModel(j, i, 0);
+            gameBoardSize = 4;
             SpawnNewRandomTile();
             SpawnNewRandomTile();
         }
@@ -52,40 +58,49 @@ namespace TwoZeroFourEight.Models
 
         public void MoveUp()
         {
-            for(int i = 1; i < 4; i++)
+            for(int i = 0; i < 4; i++)
                 for(int j = 0; j < 4; j++)
                     Move(i, j, -1, 0);
+            ClearChanged();
+            SpawnNewRandomTile();
         }
 
         public void MoveDown()
         {
-            for(int i = 2; i >= 0; i--)
+            for(int i = 4; i >= 0; i--)
                 for(int j = 0; j < 4; j++)
                     Move(i, j, 1, 0);
+            ClearChanged();
+            SpawnNewRandomTile();
         }
 
         public void MoveLeft()
         {
             for(int i = 0; i < 4; i++)
-                for(int j = 1; j < 4; j++)
+                for(int j = 0; j < 4; j++)
                     Move(i, j, 0, -1);
+            ClearChanged();
+            SpawnNewRandomTile();
         }
 
         public void MoveRight()
         {
             for(int i = 0; i < 4; i++)
-                for(int j = 2; j >= 0; j--)
+                for(int j = 3; j >= 0; j--)
                     Move(i, j, 0, 1);
+            ClearChanged();
         }
 
         private void Move(int row, int col, int rowDir, int colDir)
         {
             int nextRow = row + rowDir;
             int nextCol = col + colDir;
+            if(nextRow >= gameBoardSize || nextCol >= gameBoardSize || nextRow < 0 || nextCol < 0 || _gameBoard[row, col].Number == 0) 
+                return;
             if(_gameBoard[nextRow, nextCol].Number == 0)
             {
-                _gameBoard[nextRow, nextCol] = _gameBoard[row, col];
-                _gameBoard[nextRow, nextCol].Clear();
+                _gameBoard[nextRow, nextCol].Number = _gameBoard[row, col].Number;
+                _gameBoard[row, col].Clear();
                 Move(nextRow, nextCol, rowDir, colDir);
             }
             else if(_gameBoard[nextRow, nextCol].Number == _gameBoard[row, col].Number && !_gameBoard[nextRow, nextCol].HasChanged)
@@ -93,6 +108,13 @@ namespace TwoZeroFourEight.Models
                 _gameBoard[nextRow, nextCol].DoubleIt();
                 _gameBoard[row, col].Clear();
             }
+        }
+
+        private void ClearChanged()
+        {
+            for(int i = 0; i < gameBoardSize; i++)
+                for(int j = 0; j < gameBoardSize; j++)
+                    _gameBoard[i, j].HasChanged = false;
         }
     }
 }

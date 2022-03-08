@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using TwoZeroFourEight.Models;
+using ReactiveUI;
 
 namespace TwoZeroFourEight.ViewModels
 {
@@ -15,27 +16,28 @@ namespace TwoZeroFourEight.ViewModels
         public GameBoardViewModel()
         {
             _game = new GameModel(4);
-            GameTileModel[,] gameBoard = game.GameBoard;
+            _game.NewGame();
+            GameTileModel[,] gameBoard = _game.GameBoard;
             List<GameTileModel> items = new List<GameTileModel>();
             Width = 400;
             Height = 400;
             for(int i = 0; i < 4; i++)
                 for(int j = 0; j < 4; j++)
-                    items.Add(gameBoard[i, j])
+                    items.Add(gameBoard[i, j]);
 
-            _currentItems = new ObservableCollection<GameTileModel>(items);
+            this._currentItems = new ObservableCollection<GameTileModel>(items);
         }
 
         public ObservableCollection<GameTileModel> Items {
             get => _currentItems;
-            set => this.RaiseAndSetIfChanged(ref _currentItems, value);
+            set => this.RaiseAndSetIfChanged(ref _currentItems, value); 
         }
         public int Width{ get; set; }
         public int Height{ get; set; }
 
         public void NewBoard(int size = 4)
         {
-            game.NewGame();
+            _game.NewGame();
         }
 
         public void MoveUp()
@@ -61,13 +63,13 @@ namespace TwoZeroFourEight.ViewModels
 
         private void RedrawGame()
         {
-            GameTileModel[,] gameBoard = game.GameBoard;
+            GameTileModel[,] gameBoard = _game.GameBoard;
             List<GameTileModel> items = new List<GameTileModel>();
             for(int i = 0; i < Width / 100; i++)
                 for(int j = 0; j < Height / 100; j++)
-                    items.Add(gameBoard[i, j])
+                    items.Add(gameBoard[i, j]);
 
-            _currentItems = new ObservableCollection<GameTileModel>(items);
+            Items = new ObservableCollection<GameTileModel>(items);
         }
     }
 }
