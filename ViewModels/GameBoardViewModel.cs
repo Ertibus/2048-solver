@@ -130,7 +130,7 @@ namespace TwoZeroFourEight.ViewModels
             }
             if(!_game.HasLegalMove())
             {
-                GameState = "You Lost:\nYou Have no more legal moves.";
+                GameState = "You Lost:\nYou Have no more moves.";
                 _state = GameStateEnum.GameOver;
             }
         }

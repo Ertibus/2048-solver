@@ -82,9 +82,9 @@ namespace TwoZeroFourEight.Models
                 case 64:
                     return "#aaaaff";
                 case 128:
-                    return "#eeeeff";
+                    return "#dddd8e";
                 case 256:
-                    return "#dddd77";
+                    return "#dddd47";
                 case 512:
                     return "#dda777";
                 case 1024:
