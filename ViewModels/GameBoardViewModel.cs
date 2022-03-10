@@ -10,18 +10,30 @@ namespace TwoZeroFourEight.ViewModels
     class GameBoardViewModel : ViewModelBase
     {
 
+        private int _selectedMode;
         private GameModel _game;
+        private int _width;
+        private int _height;
         private ObservableCollection<GameTileModel> _currentItems;
         private int _score;
+        private ViewModelBase _gameControls;
+        private List<ViewModelBase> _availableControls;
+        
 
         public GameBoardViewModel()
         {
+            _selectedMode = 0;
             _game = new GameModel(4);
             _game.NewGame();
             GameTileModel[,] gameBoard = _game.GameBoard;
             List<GameTileModel> items = new List<GameTileModel>();
-            Width = 400;
-            Height = 400;
+            _width = _height = _game.gameBoardSize;
+
+            _availableControls = new List<ViewModelBase>();
+            _availableControls.Add(new ManualGameViewModel(this));
+
+            _gameControls = _availableControls[0];
+
             for(int i = 0; i < 4; i++)
                 for(int j = 0; j < 4; j++)
                     items.Add(gameBoard[i, j]);
@@ -33,16 +45,29 @@ namespace TwoZeroFourEight.ViewModels
             get => _currentItems;
             set => this.RaiseAndSetIfChanged(ref _currentItems, value); 
         }
-        public int Width{ get; set; }
-        public int Height{ get; set; }
+        public int Width{ get => _width * (GameTileModel.TILE_SIZE + GameTileModel.PADDING) ; set => _width = value; }
+        public int Height{ get => _height * (GameTileModel.TILE_SIZE + GameTileModel.PADDING) ; set => _width = value; }
         public int GameScore {
             get => _score;
             set => this.RaiseAndSetIfChanged(ref _score, value);
         }
+        public ViewModelBase GameControls {
+            get => _gameControls;
+            set => this.RaiseAndSetIfChanged(ref _gameControls, value);
+        }
+        public int SelectedMode {
+            get => _selectedMode;
+            set {
+            _selectedMode = value;
+            NewBoard();
+            }
+        }
 
-        public void NewBoard(int size = 4)
+        public void NewBoard()
         {
+            GameControls = _availableControls[_selectedMode];
             _game.NewGame();
+            RedrawGame();
         }
 
         public void MoveUp()
@@ -70,12 +95,17 @@ namespace TwoZeroFourEight.ViewModels
         {
             GameTileModel[,] gameBoard = _game.GameBoard;
             List<GameTileModel> items = new List<GameTileModel>();
-            for(int i = 0; i < Width / 100; i++)
-                for(int j = 0; j < Height / 100; j++)
+            for(int i = 0; i < _width; i++)
+                for(int j = 0; j < _height; j++)
                     items.Add(gameBoard[i, j]);
 
             Items = new ObservableCollection<GameTileModel>(items);
             GameScore = _game.Score;
+        }
+
+        public void EnableWinCondition(bool enable)
+        {
+            _game.CanWin = enable;
         }
     }
 }

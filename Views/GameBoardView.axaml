@@ -11,19 +11,22 @@
     </Style>
   </UserControl.Styles>
 
-  <Grid ShowGridLines="True" ColumnDefinitions="*,Auto,*" RowDefinitions="Auto,*,Auto,Auto,*">
-      <StackPanel Grid.Row="0" Grid.Column="1">
-        <ComboBox SelectedIndex="0" Width="200" HorizontalAlignment="Center">
+  <Grid ShowGridLines="True" ColumnDefinitions="*,Auto,*" RowDefinitions="*,Auto,Auto,*">
+      <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Text="PLAYING"/>
+      <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal"  HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+        <ComboBox SelectedIndex="{Binding SelectedMode}" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center">
           <ComboBoxItem Content="Manual"/>
           <ComboBoxItem Content="Human AI"/>
           <ComboBoxItem Content="Smart AI"/>
         </ComboBox>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center"
+                Command="{Binding NewBoard}" Content="New Game"/>
       </StackPanel>
-      <Grid Grid.Row="2" Grid.Column="1" ColumnDefinitions="*,Auto,Auto,*" RowDefinitions="*">
+      <Grid Grid.Row="1" Grid.Column="1" ColumnDefinitions="*,Auto,Auto,*" RowDefinitions="*">
           <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="32" Text="Score: "/>
           <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="32" Text="{Binding GameScore}"/>
       </Grid>
-      <ItemsControl Grid.Row="3"
+      <ItemsControl Grid.Row="2"
                     Grid.Column="1"
                     Items="{Binding Items}"
                     Width="{Binding Width}"
@@ -46,27 +49,6 @@
           </DataTemplate>
         </ItemsControl.DataTemplates>
       </ItemsControl>
-      <Grid Grid.Row="3" Grid.Column="2" ColumnDefinitions="*,Auto,Auto,Auto,*" RowDefinitions="*,Auto,Auto,*">
-          <Button Width="100" Height="64"
-                  Grid.Row="1" Grid.Column="2"
-                  Command="{Binding MoveUp}" HotKey="Up">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Text="⬆️" />
-          </Button>
-          <Button Width="100" Height="64"
-                  Grid.Row="2" Grid.Column="2"
-                  Command="{Binding MoveDown}" HotKey="Down">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Text="⬇️" />
-          </Button>
-          <Button Width="100" Height="64" 
-                  Grid.Row="2" Grid.Column="1"
-                  Command="{Binding MoveLeft}" HotKey="Left">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Text="⬅️" />
-          </Button>
-          <Button Width="100" Height="64"
-                  Grid.Row="2" Grid.Column="3"
-                  Command="{Binding MoveRight}" HotKey="Right">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Text="➡️" />
-          </Button>
-      </Grid>
+      <ContentControl Grid.Row="2" Grid.Column="2" Content="{Binding GameControls}" />
   </Grid>
 </UserControl>

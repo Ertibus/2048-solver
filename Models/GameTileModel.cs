@@ -2,7 +2,8 @@ namespace TwoZeroFourEight.Models
 {
     class GameTileModel
     {
-        private static int TILE_SIZE = 100;
+        public static int TILE_SIZE = 100;
+        public static int PADDING = 10;
 
         public GameTileModel(int x, int y, int number)
         {
@@ -26,13 +27,13 @@ namespace TwoZeroFourEight.Models
 
         public int PosX
         {
-            get => _posX * TILE_SIZE;
+            get => _posX * (TILE_SIZE + PADDING);
             set { _posX = value; }
         }
 
         public int PosY
         {
-            get => _posY * TILE_SIZE;
+            get => _posY * (TILE_SIZE + PADDING);
             set { _posY = value; }
         }
 
@@ -65,21 +66,33 @@ namespace TwoZeroFourEight.Models
                 case 0:
                     return "#eeeeee";
                 case 2:
-                    return "#ffffaa";
+                    return "#aaffff";
                 case 4:
-                    return "#aaffaa";
+                    return "#55aaaa";
                 case 8:
-                    return "#aaddff";
+                    return "#44ffff";
                 case 16:
-                    return "#aaaaff";
+                    return "#44a4ff";
                 case 32:
-                    return "#77ffff";
-                case 64:
                     return "#7777ff";
+                case 64:
+                    return "#aaaaff";
                 case 128:
-                    return "#777777";
+                    return "#eeeeff";
+                case 256:
+                    return "#dddd77";
+                case 512:
+                    return "#dda777";
+                case 1024:
+                    return "#dd7777";
+                case 2048:
+                    return "#ff6666";
+                case 4096:
+                    return "#ff4466";
+                case 8192:
+                    return "#699999";
                 default:
-                    return "#000000";
+                    return "#aaaaaa";
             }
         } 
     }

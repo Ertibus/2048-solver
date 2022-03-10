@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="TwoZeroFourEight.Views.ManualGameView">
+      <Grid Grid.Row="2" Grid.Column="2" ColumnDefinitions="*" RowDefinitions="Auto,*,Auto" Margin="8">
+        <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding EnableWin}"> Enable Win Condition </CheckBox>
+        <Grid Grid.Row="2" Grid.Column="0" ColumnDefinitions="*,Auto,Auto,Auto,*" RowDefinitions="*,Auto,Auto,*">
+            <Button Width="100" Height="64"
+                    Grid.Row="1" Grid.Column="2"
+                    Command="{Binding MoveUp}" HotKey="Up">
+              <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Text="⬆️" />
+            </Button>
+            <Button Width="100" Height="64"
+                    Grid.Row="2" Grid.Column="2"
+                    Command="{Binding MoveDown}" HotKey="Down">
+              <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Text="⬇️" />
+            </Button>
+            <Button Width="100" Height="64" 
+                    Grid.Row="2" Grid.Column="1"
+                    Command="{Binding MoveLeft}" HotKey="Left">
+              <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Text="⬅️" />
+            </Button>
+            <Button Width="100" Height="64"
+                    Grid.Row="2" Grid.Column="3"
+                    Command="{Binding MoveRight}" HotKey="Right">
+              <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Text="➡️" />
+            </Button>
+        </Grid>
+      </Grid>
+</UserControl>

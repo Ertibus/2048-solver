@@ -5,11 +5,12 @@ namespace TwoZeroFourEight.Models
 {
     class GameModel
     {
+        public int gameBoardSize;
         private readonly Random _random = new Random();
         private GameTileModel[,] _gameBoard;
-        private int gameBoardSize;
         private bool hasChanged;
         private int _score;
+        private bool _canWin;
 
         public GameModel(int size = 4)
         {
@@ -28,6 +29,12 @@ namespace TwoZeroFourEight.Models
         public int Score
         {
             get => _score;
+        }
+
+        public bool CanWin
+        {
+            get => _canWin;
+            set => _canWin = value;
         }
 
         private void SpawnNewRandomTile()
@@ -156,6 +163,15 @@ namespace TwoZeroFourEight.Models
             for(int i = 0; i < gameBoardSize; i++)
                 for(int j = 0; j < gameBoardSize; j++)
                     _gameBoard[i, j].HasChanged = false;
+        }
+        
+        public bool HasWon()
+        {
+            for(int i = 0; i < gameBoardSize; i++)
+                for(int j = 0; j < gameBoardSize; j++)
+                    if(_gameBoard[i, j].Number >= 2048)
+                        return _canWin;
+            return false;
         }
     }
 }
