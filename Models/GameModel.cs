@@ -8,6 +8,7 @@ namespace TwoZeroFourEight.Models
         private readonly Random _random = new Random();
         private GameTileModel[,] _gameBoard;
         private int gameBoardSize = 4;
+        private bool hasChanged = false;
         public GameTileModel[,] GameBoard
         {
             get => _gameBoard;
@@ -62,7 +63,11 @@ namespace TwoZeroFourEight.Models
                 for(int j = 0; j < 4; j++)
                     Move(i, j, -1, 0);
             ClearChanged();
-            SpawnNewRandomTile();
+            if(hasChanged)
+            {
+                SpawnNewRandomTile();
+                hasChanged = false;
+            }
         }
 
         public void MoveDown()
@@ -71,7 +76,11 @@ namespace TwoZeroFourEight.Models
                 for(int j = 0; j < 4; j++)
                     Move(i, j, 1, 0);
             ClearChanged();
-            SpawnNewRandomTile();
+            if(hasChanged)
+            {
+                SpawnNewRandomTile();
+                hasChanged = false;
+            }
         }
 
         public void MoveLeft()
@@ -80,7 +89,11 @@ namespace TwoZeroFourEight.Models
                 for(int j = 0; j < 4; j++)
                     Move(i, j, 0, -1);
             ClearChanged();
-            SpawnNewRandomTile();
+            if(hasChanged)
+            {
+                SpawnNewRandomTile();
+                hasChanged = false;
+            }
         }
 
         public void MoveRight()
@@ -89,6 +102,11 @@ namespace TwoZeroFourEight.Models
                 for(int j = 3; j >= 0; j--)
                     Move(i, j, 0, 1);
             ClearChanged();
+            if(hasChanged)
+            {
+                SpawnNewRandomTile();
+                hasChanged = false;
+            }
         }
 
         private void Move(int row, int col, int rowDir, int colDir)
@@ -101,13 +119,24 @@ namespace TwoZeroFourEight.Models
             {
                 _gameBoard[nextRow, nextCol].Number = _gameBoard[row, col].Number;
                 _gameBoard[row, col].Clear();
+                hasChanged = true;
                 Move(nextRow, nextCol, rowDir, colDir);
             }
             else if(_gameBoard[nextRow, nextCol].Number == _gameBoard[row, col].Number && !_gameBoard[nextRow, nextCol].HasChanged)
             {
                 _gameBoard[nextRow, nextCol].DoubleIt();
                 _gameBoard[row, col].Clear();
+                hasChanged = true;
             }
+        }
+
+        private bool HasChanged()
+        {
+            for(int i = 0; i < gameBoardSize; i++)
+                for(int j = 0; j < gameBoardSize; j++)
+                    if (_gameBoard[i, j].HasChanged)
+                        return true;
+            return false;
         }
 
         private void ClearChanged()

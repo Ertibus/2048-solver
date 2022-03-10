@@ -36,6 +36,11 @@ namespace TwoZeroFourEight.Models
             set { _posY = value; }
         }
 
+        public string Color
+        {
+            get => GetColor(_number);
+        }
+
         private int _number;
         private bool _hasChanged;
         private int _posX;
@@ -52,5 +57,30 @@ namespace TwoZeroFourEight.Models
             _number *= 2;
             _hasChanged = true;
         }
+
+        public string GetColor(int n)
+        {
+            switch(n) 
+            {
+                case 0:
+                    return "#eeeeee";
+                case 2:
+                    return "#ffffaa";
+                case 4:
+                    return "#aaffaa";
+                case 8:
+                    return "#aaddff";
+                case 16:
+                    return "#aaaaff";
+                case 32:
+                    return "#77ffff";
+                case 64:
+                    return "#7777ff";
+                case 128:
+                    return "#777777";
+                default:
+                    return "#000000";
+            }
+        } 
     }
 }

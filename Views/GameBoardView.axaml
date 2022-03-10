@@ -32,7 +32,7 @@
 
         <ItemsControl.DataTemplates>
           <DataTemplate>
-            <Border Background="#333fff"
+            <Border Background="{Binding Color}"
                     BorderBrush="Black"
                     BorderThickness="2"
                     Width="100"
