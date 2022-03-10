@@ -47,10 +47,26 @@
         </ItemsControl.DataTemplates>
       </ItemsControl>
       <Grid Grid.Row="3" Grid.Column="2" ColumnDefinitions="*,Auto,Auto,Auto,*" RowDefinitions="*,Auto,Auto,*">
-          <Button Width="100" Grid.Row="1" Grid.Column="2" Command="{Binding MoveUp}" HotKey="Up"/>
-          <Button Width="100" Grid.Row="2" Grid.Column="2" Command="{Binding MoveDown}" HotKey="Down"/>
-          <Button Width="100" Grid.Row="2" Grid.Column="1" Command="{Binding MoveLeft}" HotKey="Left"/>
-          <Button Width="100" Grid.Row="2" Grid.Column="3" Command="{Binding MoveRight}" HotKey="Right"/>
+          <Button Width="100" Height="64"
+                  Grid.Row="1" Grid.Column="2"
+                  Command="{Binding MoveUp}" HotKey="Up">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Text="⬆️" />
+          </Button>
+          <Button Width="100" Height="64"
+                  Grid.Row="2" Grid.Column="2"
+                  Command="{Binding MoveDown}" HotKey="Down">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Text="⬇️" />
+          </Button>
+          <Button Width="100" Height="64" 
+                  Grid.Row="2" Grid.Column="1"
+                  Command="{Binding MoveLeft}" HotKey="Left">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Text="⬅️" />
+          </Button>
+          <Button Width="100" Height="64"
+                  Grid.Row="2" Grid.Column="3"
+                  Command="{Binding MoveRight}" HotKey="Right">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Text="➡️" />
+          </Button>
       </Grid>
   </Grid>
 </UserControl>
