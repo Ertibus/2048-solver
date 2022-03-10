@@ -83,30 +83,32 @@ namespace TwoZeroFourEight.ViewModels
             RedrawGame();
         }
 
+        private bool CanMove() => (_state != GameStateEnum.GameOver);
+
         public void MoveUp()
         {
-            if(!(_state == GameStateEnum.Playing))
+            if(!CanMove())
                 return;
             _game.MoveUp();
             RedrawGame();
         }
         public void MoveDown()
         {
-            if(!(_state == GameStateEnum.Playing))
+            if(!CanMove())
                 return;
             _game.MoveDown();
             RedrawGame();
         }
         public void MoveLeft()
         {
-            if(!(_state == GameStateEnum.Playing))
+            if(!CanMove())
                 return;
             _game.MoveLeft();
             RedrawGame();
         }
         public void MoveRight()
         {
-            if(!(_state == GameStateEnum.Playing))
+            if(!CanMove())
                 return;
             _game.MoveRight();
             RedrawGame();
@@ -126,7 +128,6 @@ namespace TwoZeroFourEight.ViewModels
             if(_game.HasWon())
             {
                 GameState = "Victory!";
-                _state = GameStateEnum.GameOver;
             }
             if(!_game.HasLegalMove())
             {
