@@ -18,6 +18,8 @@ namespace TwoZeroFourEight.ViewModels
         private int _score;
         private ViewModelBase _gameControls;
         private List<ViewModelBase> _availableControls;
+        private string _gameState;
+        private GameStateEnum _state;
         
 
         public GameBoardViewModel()
@@ -33,6 +35,9 @@ namespace TwoZeroFourEight.ViewModels
             _availableControls.Add(new ManualGameViewModel(this));
 
             _gameControls = _availableControls[0];
+
+            _gameState = " ";
+            _state = GameStateEnum.Playing;
 
             for(int i = 0; i < 4; i++)
                 for(int j = 0; j < 4; j++)
@@ -63,30 +68,46 @@ namespace TwoZeroFourEight.ViewModels
             }
         }
 
+        public string GameState 
+        {
+            get => _gameState;
+            set => this.RaiseAndSetIfChanged(ref _gameState, value);
+        }
+
         public void NewBoard()
         {
             GameControls = _availableControls[_selectedMode];
             _game.NewGame();
+            GameState = " ";
+            _state = GameStateEnum.Playing;
             RedrawGame();
         }
 
         public void MoveUp()
         {
+            if(!(_state == GameStateEnum.Playing))
+                return;
             _game.MoveUp();
             RedrawGame();
         }
         public void MoveDown()
         {
+            if(!(_state == GameStateEnum.Playing))
+                return;
             _game.MoveDown();
             RedrawGame();
         }
         public void MoveLeft()
         {
+            if(!(_state == GameStateEnum.Playing))
+                return;
             _game.MoveLeft();
             RedrawGame();
         }
         public void MoveRight()
         {
+            if(!(_state == GameStateEnum.Playing))
+                return;
             _game.MoveRight();
             RedrawGame();
         }
@@ -101,11 +122,27 @@ namespace TwoZeroFourEight.ViewModels
 
             Items = new ObservableCollection<GameTileModel>(items);
             GameScore = _game.Score;
+            // Won?
+            if(_game.HasWon())
+            {
+                GameState = "Victory!";
+                _state = GameStateEnum.GameOver;
+            }
+            if(!_game.HasLegalMove())
+            {
+                GameState = "You Lost:\nYou Have no more legal moves.";
+                _state = GameStateEnum.GameOver;
+            }
         }
 
         public void EnableWinCondition(bool enable)
         {
             _game.CanWin = enable;
         }
+    }
+    enum GameStateEnum
+    {
+        Playing,
+        GameOver,
     }
 }

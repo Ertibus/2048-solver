@@ -64,7 +64,7 @@ namespace TwoZeroFourEight.Models
             SpawnNewRandomTile();
         }
 
-        private bool HasLegalMove()
+        public bool HasLegalMove()
         {
             for(int i = 0; i < 4; i++)
                 for(int j = 0; j < 4; j++)

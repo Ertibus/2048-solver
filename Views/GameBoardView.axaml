@@ -12,12 +12,10 @@
   </UserControl.Styles>
 
   <Grid ShowGridLines="True" ColumnDefinitions="*,Auto,*" RowDefinitions="*,Auto,Auto,*">
-      <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Text="PLAYING"/>
+      <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="32" Text="{Binding GameState}"/>
       <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal"  HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
         <ComboBox SelectedIndex="{Binding SelectedMode}" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center">
           <ComboBoxItem Content="Manual"/>
-          <ComboBoxItem Content="Human AI"/>
-          <ComboBoxItem Content="Smart AI"/>
         </ComboBox>
         <Button HorizontalAlignment="Center" VerticalAlignment="Center"
                 Command="{Binding NewBoard}" Content="New Game"/>
@@ -44,7 +42,7 @@
                     BorderThickness="2"
                     Width="100"
                     Height="100">
-              <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Text="{Binding Number}"/>
+              <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Foreground="{Binding FgColor}" Text="{Binding Number}"/>
             </Border>
           </DataTemplate>
         </ItemsControl.DataTemplates>

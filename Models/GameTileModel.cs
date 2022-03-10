@@ -41,6 +41,10 @@ namespace TwoZeroFourEight.Models
         {
             get => GetColor(_number);
         }
+        public string FgColor
+        {
+            get => GetFontColor(_number);
+        }
 
         private int _number;
         private bool _hasChanged;
@@ -95,5 +99,15 @@ namespace TwoZeroFourEight.Models
                     return "#aaaaaa";
             }
         } 
+        public string GetFontColor(int n)
+        {
+            switch(n)
+            {
+                case 0:
+                    return "#eeeeee";
+                default:
+                    return "#000000";
+            }
+        }
     }
 }
