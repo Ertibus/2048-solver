@@ -7,18 +7,27 @@ namespace TwoZeroFourEight.Models
     {
         private readonly Random _random = new Random();
         private GameTileModel[,] _gameBoard;
-        private int gameBoardSize = 4;
-        private bool hasChanged = false;
+        private int gameBoardSize;
+        private bool hasChanged;
+        private int _score;
+
+        public GameModel(int size = 4)
+        {
+            _gameBoard = new GameTileModel[size, size];
+            gameBoardSize = size;
+            hasChanged = false;
+            _score = 0;
+        }
+
         public GameTileModel[,] GameBoard
         {
             get => _gameBoard;
             private set { _gameBoard = value; }
         }
 
-        public GameModel(int size = 4)
+        public int Score
         {
-            _gameBoard = new GameTileModel[size, size];
-            gameBoardSize = size;
+            get => _score;
         }
 
         private void SpawnNewRandomTile()
@@ -42,6 +51,8 @@ namespace TwoZeroFourEight.Models
                 for(int j = 0; j < 4; j++)
                     _gameBoard[i, j] = new GameTileModel(j, i, 0);
             gameBoardSize = 4;
+            _score = 0;
+            hasChanged = false;
             SpawnNewRandomTile();
             SpawnNewRandomTile();
         }
@@ -125,6 +136,7 @@ namespace TwoZeroFourEight.Models
             else if(_gameBoard[nextRow, nextCol].Number == _gameBoard[row, col].Number && !_gameBoard[nextRow, nextCol].HasChanged)
             {
                 _gameBoard[nextRow, nextCol].DoubleIt();
+                _score += _gameBoard[nextRow, nextCol].Number;
                 _gameBoard[row, col].Clear();
                 hasChanged = true;
             }

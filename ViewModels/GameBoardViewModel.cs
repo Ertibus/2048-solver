@@ -12,6 +12,7 @@ namespace TwoZeroFourEight.ViewModels
 
         private GameModel _game;
         private ObservableCollection<GameTileModel> _currentItems;
+        private int _score;
 
         public GameBoardViewModel()
         {
@@ -34,6 +35,10 @@ namespace TwoZeroFourEight.ViewModels
         }
         public int Width{ get; set; }
         public int Height{ get; set; }
+        public int GameScore {
+            get => _score;
+            set => this.RaiseAndSetIfChanged(ref _score, value);
+        }
 
         public void NewBoard(int size = 4)
         {
@@ -70,6 +75,7 @@ namespace TwoZeroFourEight.ViewModels
                     items.Add(gameBoard[i, j]);
 
             Items = new ObservableCollection<GameTileModel>(items);
+            GameScore = _game.Score;
         }
     }
 }
