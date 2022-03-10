@@ -32,22 +32,21 @@
 
         <ItemsControl.DataTemplates>
           <DataTemplate>
-            <Border Background="Gray"
+            <Border Background="#333fff"
                     BorderBrush="Black"
                     BorderThickness="2"
-                    CornerRadius="3"
                     Width="100"
                     Height="100">
-              <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Number}"/>
+              <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Text="{Binding Number}"/>
             </Border>
           </DataTemplate>
         </ItemsControl.DataTemplates>
       </ItemsControl>
       <Grid Grid.Row="0" Grid.Column="2" ColumnDefinitions="*,Auto,Auto,Auto,*" RowDefinitions="*,Auto,Auto,*">
-          <Button Width="100" Grid.Row="1" Grid.Column="2" Command="{Binding MoveUp}"/>
-          <Button Width="100" Grid.Row="2" Grid.Column="2" Command="{Binding MoveDown}"/>
-          <Button Width="100" Grid.Row="2" Grid.Column="1" Command="{Binding MoveLeft}"/>
-          <Button Width="100" Grid.Row="2" Grid.Column="3" Command="{Binding MoveRight}"/>
+          <Button Width="100" Grid.Row="1" Grid.Column="2" Command="{Binding MoveUp}" HotKey="Up"/>
+          <Button Width="100" Grid.Row="2" Grid.Column="2" Command="{Binding MoveDown}" HotKey="Down"/>
+          <Button Width="100" Grid.Row="2" Grid.Column="1" Command="{Binding MoveLeft}" HotKey="Left"/>
+          <Button Width="100" Grid.Row="2" Grid.Column="3" Command="{Binding MoveRight}" HotKey="Right"/>
       </Grid>
   </Grid>
 </UserControl>
