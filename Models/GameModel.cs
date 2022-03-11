@@ -12,12 +12,12 @@ namespace TwoZeroFourEight.Models
         private int _score;
         private bool _canWin;
 
-        public GameModel(int size = 4)
+        public GameModel(int size = 4, int score = 0)
         {
             _gameBoard = new GameTileModel[size, size];
             gameBoardSize = size;
             hasChanged = false;
-            _score = 0;
+            _score = score;
         }
 
         public GameTileModel[,] GameBoard

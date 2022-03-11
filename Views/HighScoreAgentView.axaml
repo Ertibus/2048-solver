@@ -6,10 +6,13 @@
              x:Class="TwoZeroFourEight.Views.HighScoreAgentView">
   <Grid Grid.Row="2" Grid.Column="2" ColumnDefinitions="*" RowDefinitions="Auto,*,Auto" Margin="8">
     <StackPanel Grid.Row="0" Grid.Column="0">
-        <CheckBox IsChecked="{Binding EnableWin}"> Enable Win Condition </CheckBox>
+        <CheckBox Margin="4" IsChecked="{Binding EnableWin}"> Enable Win Condition </CheckBox>
+        <TextBlock FontSize="16" Text="Delay:"/>
         <Slider Minimum="0.1" Maximum="2" Value="{Binding MoveDelay}" />
+        <TextBlock FontSize="16" Text="Depth:"/>
+        <Slider Minimum="1" Maximum="10" Value="{Binding SearchDepth}" />
     </StackPanel>
-    <Button Width="100" Height="64"
+    <Button Width="100" FontSize="24"
             HorizontalAlignment="Center" VerticalAlignment="Center"
             Grid.Row="2" Grid.Column="3"
             Command="{Binding SolveGame}" HotKey="Right" Content="{Binding SolveButtonText}"/>

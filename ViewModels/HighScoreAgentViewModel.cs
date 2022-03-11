@@ -12,8 +12,8 @@ namespace TwoZeroFourEight.ViewModels
         private GameBoardViewModel _game;
         private string _solveButtonText;
         private bool _isSolving;
-        private double _moveDelay;
-        
+        private double _moveDelay; private int _searchDepth;
+
         private Thread solverThread;
         private object _locker;
 
@@ -24,6 +24,7 @@ namespace TwoZeroFourEight.ViewModels
             _solveButtonText = "Solve";
             _isSolving = false;
             _moveDelay = 0.1;
+            _searchDepth = 1;
             _locker = new object();
         }
 
@@ -40,6 +41,12 @@ namespace TwoZeroFourEight.ViewModels
         {
             get => _moveDelay;
             set => _moveDelay = value;
+        }
+
+        public int SearchDepth 
+        {
+            get => _searchDepth;
+            set => _searchDepth = value;
         }
 
         public string SolveButtonText 
@@ -91,7 +98,7 @@ namespace TwoZeroFourEight.ViewModels
             {
                 lock(_locker)
                 {
-                    switch(HighScoreAI.GetNextMove(_game.Game))
+                    switch(HighScoreAI.GetNextMove(_game.Game, _searchDepth))
                     {
                         case GameMoves.Up:
                             MoveUp();

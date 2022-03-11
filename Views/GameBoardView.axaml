@@ -11,7 +11,7 @@
     </Style>
   </UserControl.Styles>
 
-  <Grid ShowGridLines="True" ColumnDefinitions="*,Auto,*" RowDefinitions="*,Auto,Auto,*">
+  <Grid ColumnDefinitions="*,Auto,*" RowDefinitions="*,Auto,Auto,*">
       <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Text="{Binding GameState}"/>
       <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal"  HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
         <ComboBox SelectedIndex="{Binding SelectedMode}" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center">
