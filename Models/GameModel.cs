@@ -23,7 +23,7 @@ namespace TwoZeroFourEight.Models
         public GameTileModel[,] GameBoard
         {
             get => _gameBoard;
-            private set { _gameBoard = value; }
+            set { _gameBoard = value; }
         }
 
         public int Score
@@ -75,7 +75,7 @@ namespace TwoZeroFourEight.Models
             return false;
         }
 
-        public void MoveUp()
+        public bool MoveUp()
         {
             for(int i = 0; i < 4; i++)
                 for(int j = 0; j < 4; j++)
@@ -85,10 +85,13 @@ namespace TwoZeroFourEight.Models
             {
                 SpawnNewRandomTile();
                 hasChanged = false;
+                return true;
+            } else {
+                return false;
             }
         }
 
-        public void MoveDown()
+        public bool MoveDown()
         {
             for(int i = 4; i >= 0; i--)
                 for(int j = 0; j < 4; j++)
@@ -98,10 +101,13 @@ namespace TwoZeroFourEight.Models
             {
                 SpawnNewRandomTile();
                 hasChanged = false;
+                return true;
+            } else {
+                return false;
             }
         }
 
-        public void MoveLeft()
+        public bool MoveLeft()
         {
             for(int i = 0; i < 4; i++)
                 for(int j = 0; j < 4; j++)
@@ -111,10 +117,13 @@ namespace TwoZeroFourEight.Models
             {
                 SpawnNewRandomTile();
                 hasChanged = false;
+                return true;
+            } else {
+                return false;
             }
         }
 
-        public void MoveRight()
+        public bool MoveRight()
         {
             for(int i = 0; i < 4; i++)
                 for(int j = 3; j >= 0; j--)
@@ -124,7 +133,34 @@ namespace TwoZeroFourEight.Models
             {
                 SpawnNewRandomTile();
                 hasChanged = false;
+                return true;
+            } else {
+                return false;
             }
+        }
+
+        public void MoveAny()
+        {
+            switch (_random.Next(4))
+            {
+                case 0:
+                    if(!MoveUp())
+                        MoveAny();
+                    return;
+                case 1:
+                    if(!MoveDown())
+                        MoveAny();
+                    return;
+                case 2:
+                    if(!MoveLeft())
+                        MoveAny();
+                    return;
+                case 3:
+                    if(!MoveRight())
+                        MoveAny();
+                    return;
+            }
+
         }
 
         private void Move(int row, int col, int rowDir, int colDir)
@@ -172,6 +208,15 @@ namespace TwoZeroFourEight.Models
                     if(_gameBoard[i, j].Number >= 2048)
                         return _canWin;
             return false;
+        }
+
+        public GameTileModel[,] DeepCopyBoard()
+        {
+            var gameBoard = new GameTileModel[4, 4];
+            for(int i = 0; i < 4; i++)
+                for(int j = 0; j < 4; j++)
+                    gameBoard[i, j] = new GameTileModel(j, i, _gameBoard[i, j].Number);
+            return gameBoard;
         }
     }
 }

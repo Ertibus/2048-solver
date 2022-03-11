@@ -19,7 +19,7 @@ namespace TwoZeroFourEight.ViewModels
         private ViewModelBase _gameControls;
         private List<ViewModelBase> _availableControls;
         private string _gameState;
-        private GameStateEnum _state;
+        public GameStateEnum state;
         
 
         public GameBoardViewModel()
@@ -33,11 +33,12 @@ namespace TwoZeroFourEight.ViewModels
 
             _availableControls = new List<ViewModelBase>();
             _availableControls.Add(new ManualGameViewModel(this));
+            _availableControls.Add(new HighScoreAgentViewModel(this));
 
             _gameControls = _availableControls[0];
 
             _gameState = " ";
-            _state = GameStateEnum.Playing;
+            state = GameStateEnum.Playing;
 
             for(int i = 0; i < 4; i++)
                 for(int j = 0; j < 4; j++)
@@ -74,16 +75,21 @@ namespace TwoZeroFourEight.ViewModels
             set => this.RaiseAndSetIfChanged(ref _gameState, value);
         }
 
+        public GameModel Game
+        {
+            get => _game;
+        }
+
         public void NewBoard()
         {
             GameControls = _availableControls[_selectedMode];
             _game.NewGame();
             GameState = " ";
-            _state = GameStateEnum.Playing;
+            state = GameStateEnum.Playing;
             RedrawGame();
         }
 
-        private bool CanMove() => (_state != GameStateEnum.GameOver);
+        private bool CanMove() => (state != GameStateEnum.GameOver);
 
         public void MoveUp()
         {
@@ -113,6 +119,13 @@ namespace TwoZeroFourEight.ViewModels
             _game.MoveRight();
             RedrawGame();
         }
+        public void MoveAny()
+        {
+            if(!CanMove())
+                return;
+            _game.MoveAny();
+            RedrawGame();
+        }
 
         private void RedrawGame()
         {
@@ -132,7 +145,7 @@ namespace TwoZeroFourEight.ViewModels
             if(!_game.HasLegalMove())
             {
                 GameState = "You Lost:\nYou Have no more moves.";
-                _state = GameStateEnum.GameOver;
+                state = GameStateEnum.GameOver;
             }
         }
 
@@ -140,8 +153,10 @@ namespace TwoZeroFourEight.ViewModels
         {
             _game.CanWin = enable;
         }
+
+        public GameModel GetCurrentGame() => _game;
     }
-    enum GameStateEnum
+    public enum GameStateEnum
     {
         Playing,
         GameOver,
